@@ -26,6 +26,6 @@ module.exports = {
   },
   "ignorePatterns": ["webpack.*.js", "**/dist/*.js"],
   rules: {
-    'unused-variable': 'warning',
+    'no-unused-vars': 'warn',
   },
 };
