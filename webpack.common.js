@@ -15,20 +15,23 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.less$/i,
-                use: ['style-loader', 'css-loader', 'less-loader'],
-            },
-            {
-                test: /\.styl$/i,
-                use: ['style-loader', 'css-loader', 'stylus-loader'],
-            },
-            {
                 test: /\.s[ac]ss$/i,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
-            },
-            {
-                test: /\.(css)$/i,
-                use: ['style-loader', 'css-loader'],
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        // add your plugins
+                                    ],
+                                ],
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(png|gif|jpg|jepg|svg|woff|woff2|eot|ttf|otf)$/i,
@@ -38,13 +41,16 @@ module.exports = {
                 test: /\.(?:js|mjs|cjs)$/,
                 exclude: /node_modules/,
                 use: {
-                  loader: 'babel-loader',
-                  options: {
-                    presets: [
-                      ['@babel/preset-env', { targets: "> 0.25%, not dead" }]
-                    ]
-                  }
-                }
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            [
+                                '@babel/preset-env',
+                                { targets: '> 0.25%, not dead' },
+                            ],
+                        ],
+                    },
+                },
             },
         ],
     },
@@ -63,7 +69,7 @@ module.exports = {
                     name: 'vendors',
                     chunks: 'all',
                 },
-            }
-        }
-    }
-}
+            },
+        },
+    },
+};
